@@ -1,0 +1,134 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Medical and surgical product or consumable",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "reference": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "brand": { "type": "string" },
+        "price": { "type": "number" },
+        "stockQuantity": { "type": "number" },
+        "lowStockThreshold": { "type": "number" },
+        "description": { "type": "string" },
+        "packaging": { "type": "string" },
+        "certification": { "type": "string" },
+        "isSterile": { "type": "boolean" },
+        "featured": { "type": "boolean" },
+        "images": { "type": "array" }
+      },
+      "required": ["id", "reference", "name", "category", "price", "stockQuantity"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Medical specialty category",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "iconName": { "type": "string" },
+        "description": { "type": "string" }
+      },
+      "required": ["id", "name"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Medical purchase order or proforma quote",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "orderNumber": { "type": "string" },
+        "invoiceNumber": { "type": "string" },
+        "orderType": { "type": "string", "enum": ["order", "quote"] },
+        "createdAt": { "type": "string" },
+        "customer": { "type": "object" },
+        "items": { "type": "array" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string" },
+        "userId": { "type": "string" }
+      },
+      "required": ["id", "orderNumber", "orderType", "items", "totalAmount", "status"]
+    },
+    "StockMovement": {
+      "title": "StockMovement",
+      "description": "Stock audit entry or exit",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "productId": { "type": "string" },
+        "productName": { "type": "string" },
+        "type": { "type": "string", "enum": ["IN", "OUT", "ADJUSTMENT"] },
+        "quantity": { "type": "number" },
+        "reason": { "type": "string" },
+        "performedBy": { "type": "string" },
+        "date": { "type": "string" },
+        "batchNumber": { "type": "string" }
+      },
+      "required": ["id", "productId", "type", "quantity", "date"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Registered clinic, doctor, or customer profile",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "establishmentName": { "type": "string" },
+        "phone": { "type": "string" },
+        "city": { "type": "string" },
+        "address": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "client"] },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    },
+    "StoreSettings": {
+      "title": "StoreSettings",
+      "description": "Platform settings and Congolese registration metadata",
+      "type": "object",
+      "properties": {
+        "storeName": { "type": "string" },
+        "whatsappNumber": { "type": "string" },
+        "whatsappRaw": { "type": "string" },
+        "email": { "type": "string" },
+        "address": { "type": "string" },
+        "city": { "type": "string" },
+        "country": { "type": "string" },
+        "currency": { "type": "string" },
+        "rccm": { "type": "string" },
+        "nif": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "entity": "Product",
+      "description": "Medical product catalog documents"
+    },
+    "/categories/{categoryId}": {
+      "entity": "Category",
+      "description": "Medical specialty categories"
+    },
+    "/orders/{orderId}": {
+      "entity": "Order",
+      "description": "Client orders and quotes"
+    },
+    "/stockMovements/{movementId}": {
+      "entity": "StockMovement",
+      "description": "Stock movements history"
+    },
+    "/users/{userId}": {
+      "entity": "UserProfile",
+      "description": "User profiles"
+    },
+    "/settings/{settingId}": {
+      "entity": "StoreSettings",
+      "description": "App settings document"
+    }
+  }
+}

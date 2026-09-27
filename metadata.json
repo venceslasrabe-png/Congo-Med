@@ -1,0 +1,8 @@
+{
+  "name": "CongoMed - Fournitures Médicales & Chirurgicales",
+  "description": "Plateforme e-commerce spécialisée dans les équipements et consommables médicaux & chirurgicaux avec commande WhatsApp et facturation proforma.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
